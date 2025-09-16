@@ -1,55 +1,70 @@
-# RSU-CG Standardization  
-*A proposal for simplifying RSU reporting in Indian Income Tax filings (Schedule CG).*  
+# RSU Capital Gains Standardization  
+
+*A product proposal to simplify RSU reporting in Indian Income Tax filings (Schedule CG).*  
 
 ---
 
-## 📌 Problem Statement  
-Currently, reporting **Restricted Stock Unit (RSU)** transactions in Schedule CG (Capital Gains) of Indian ITR is highly complex:  
+## 📌 Overview  
+Employees receiving **Restricted Stock Units (RSUs)** in India face major challenges during tax filing:  
 
-- RSUs are fractionated across multiple acquisition dates.  
-- Taxpayers may need to enter **30–40 rows manually** for a single sale.  
-- Brokers export data in different formats, making direct upload impossible.  
-- Even Chartered Accountants often struggle with accurate filing.  
+- Broker exports (CSV/PDF) come in inconsistent formats.  
+- Manual re-entry into **Schedule CG** can require 30–40 rows for a single sale.  
+- High risk of errors and dependency on Chartered Accountants.  
 
-This leads to:  
-- Wrong filings, causing compliance risks.  
-- Extra cost & dependency on professionals.  
-- Lost government revenue due to incorrect reporting.  
+This repository proposes an **industry-wide standardized export schema** for RSU capital gains reporting. It’s a **product-focused solution** aimed at improving employee experience, reducing errors, and enabling better compliance.  
+
+---
+
+## 🚩 Problem  
+- Inconsistent broker reports make filing time-consuming and error-prone.  
+- Fractional shares and multiple acquisition dates add complexity.  
+- Even professionals struggle to report accurately.  
 
 ---
 
 ## 💡 Proposed Solution  
-- Create a **standardized CSV/Excel template** for all brokers.  
-- Brokers export directly in this format.  
-- Filing platforms (Cleartax, government ITR portal, etc.) accept this as direct upload.  
-- No manual intervention needed → **accuracy + simplicity**.  
+- Define a **standard RSU Export Schema (CSV/JSON)** aligned with Schedule CG.  
+- Brokers auto-generate ITR-ready exports.  
+- Filing platforms support direct upload.  
+- Employees: **Download → Upload → Done ✅**  
 
 ---
 
-## 📂 Repository Contents  
-- `README.md` → Overview of the idea (this file).  
-- `docs/whitepaper.md` → Detailed explanation of the proposal.  
-- `examples/sample_broker_export.csv` → Example broker data.  
-- `examples/mapped_itr_template.csv` → Same data transformed into ITR-ready format.  
-- `src/mapping_specification.md` → Mapping rules & data definitions.  
+## 📂 Repo Structure  
+- `README.md` → Project overview & PM context  
+- `docs/whitepaper.md` → Detailed proposal and industry perspective  
+- `examples/sample_broker_export.csv` → Raw broker export example  
+- `examples/mapped_itr_template.csv` → Standardized ITR-ready CSV  
+- `LICENSE` → MIT License  
 
 ---
 
-## 🚀 Future Scope  
-- Expand to cover **all equity-linked investments** (ESPP, stock options, mutual funds).  
-- Collaborate with **brokers + ITR filing platforms + regulators** for adoption.  
-- Reduce dependency on manual tax filing, improve compliance nationwide.  
+## 📊 Example: Before & After
+
+**1️⃣ Current Broker Export (Before):**  
+
+| Broker         | Employee_ID | Stock_Symbol | Security_Name | Vesting_Date | Sale_Date   | Quantity | FMV  | Sale_Price | Brokerage_Fee | Country |
+|----------------|------------|--------------|---------------|-------------|------------|---------|------|------------|---------------|--------|
+| Morgan Stanley | EMP123     | SAP          | SAP SE        | 15-07-2023  | 10-04-2024 | 0.257   | 2850 | 3200       | 50            | Germany |
+| Morgan Stanley | EMP123     | SAP          | SAP SE        | 15-10-2023  | 10-04-2024 | 0.320   | 2900 | 3100       | 50            | Germany |
+| Morgan Stanley | EMP123     | SAP          | SAP SE        | 15-01-2024  | 10-04-2024 | 0.423   | 2950 | 3250       | 50            | Germany |
+
+**2️⃣ Standardized ITR-Ready Export (After):**  
+
+| PAN        | Broker_Name    | ISIN          | Security_Name | Country | Quantity_Sold | Vesting_Date | Sale_Date   | FMV_at_Vesting | Cost_of_Acquisition | Sale_Consideration | Broker_Charges | Net_Proceeds |
+|------------|---------------|---------------|---------------|---------|---------------|--------------|------------|----------------|-------------------|------------------|----------------|--------------|
+| ABCDE1234F | Morgan Stanley | US1234567890 | SAP SE        | Germany | 0.257         | 15-07-2023   | 10-04-2024 | 2850           | 2850              | 3200             | 50             | 3150         |
+| ABCDE1234F | Morgan Stanley | US1234567890 | SAP SE        | Germany | 0.320         | 15-10-2023   | 10-04-2024 | 2900           | 2900              | 3100             | 50             | 3050         |
+| ABCDE1234F | Morgan Stanley | US1234567890 | SAP SE        | Germany | 0.423         | 15-01-2024   | 10-04-2024 | 2950           | 2950              | 3250             | 50             | 3200         |
 
 ---
 
-## 🤝 Contribution  
-This is an **open idea**. Contributions are welcome from:  
-- Finance professionals  
-- Tax consultants  
-- Developers working with fintech/ITR platforms  
-- Policy makers and industry bodies (e.g., NASSCOM, CBDT)  
+## 📣 Call to Action  
+- **Product/Strategy:** Refine the schema, explore adoption with brokers and tax platforms.  
+- **Industry Bodies (CBDT/SEBI/NASSCOM):** Consider standardization mandates.  
+- **Employees & Recruiters:** Understand the product idea and its potential impact.  
 
 ---
 
-## 📜 License  
-This project is shared under the **MIT License** — free to use, adapt, and build upon.  
+## 📜 License
+MIT — This repository and associated proposal can be freely referenced or shared for educational, research, or professional purposes.
